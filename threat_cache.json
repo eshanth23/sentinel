@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-04-26T04:58:27.346563+00:00",
+  "source": "live-real-apis",
+  "regions": [
+    {
+      "country": "Israel-Gaza-Iran",
+      "score": 81,
+      "level": "CRITICAL",
+      "lat": 31.5,
+      "lon": 34.8,
+      "signals": {
+        "news": 28,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 17,
+        "flights": 20
+      }
+    },
+    {
+      "country": "Myanmar Conflict",
+      "score": 75,
+      "level": "CRITICAL",
+      "lat": 19.1633,
+      "lon": 96.797,
+      "signals": {
+        "news": 15,
+        "seismic": 6,
+        "finance": 6,
+        "acled": 18,
+        "flights": 20
+      }
+    },
+    {
+      "country": "Yemen-Hormuz",
+      "score": 70,
+      "level": "HIGH",
+      "lat": 26.5667,
+      "lon": 56.25,
+      "signals": {
+        "news": 22,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 14,
+        "flights": 18
+      }
+    },
+    {
+      "country": "Ukraine-Russia",
+      "score": 68,
+      "level": "HIGH",
+      "lat": 49.4871,
+      "lon": 31.2718,
+      "signals": {
+        "news": 27,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 18,
+        "flights": 7
+      }
+    },
+    {
+      "country": "Taiwan-China",
+      "score": 68,
+      "level": "HIGH",
+      "lat": 23.6978,
+      "lon": 120.9605,
+      "signals": {
+        "news": 22,
+        "seismic": 2,
+        "finance": 6,
+        "acled": 8,
+        "flights": 20
+      }
+    },
+    {
+      "country": "India-Pakistan",
+      "score": 67,
+      "level": "HIGH",
+      "lat": 30.3753,
+      "lon": 69.3451,
+      "signals": {
+        "news": 17,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 14,
+        "flights": 20
+      }
+    },
+    {
+      "country": "South China Sea",
+      "score": 65,
+      "level": "HIGH",
+      "lat": 14.0583,
+      "lon": 113.8,
+      "signals": {
+        "news": 19,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 10,
+        "flights": 20
+      }
+    },
+    {
+      "country": "NATO Eastern Flank",
+      "score": 55,
+      "level": "HIGH",
+      "lat": 52.2297,
+      "lon": 21.0122,
+      "signals": {
+        "news": 14,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 5,
+        "flights": 20
+      }
+    },
+    {
+      "country": "Korean Peninsula",
+      "score": 54,
+      "level": "ELEVATED",
+      "lat": 37.5665,
+      "lon": 126.978,
+      "signals": {
+        "news": 12,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 6,
+        "flights": 20
+      }
+    },
+    {
+      "country": "Sudan Civil War",
+      "score": 54,
+      "level": "ELEVATED",
+      "lat": 12.8628,
+      "lon": 30.2176,
+      "signals": {
+        "news": 18,
+        "seismic": 0,
+        "finance": 6,
+        "acled": 20,
+        "flights": 0
+      }
+    }
+  ]
+}

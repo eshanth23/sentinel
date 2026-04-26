@@ -1,0 +1,23 @@
+SENTINEL DEMO STARTUP INSTRUCTIONS
+
+STEP 1 — Start Python API
+Open terminal 1:
+cd C:\Users\eshan\sentinel
+venv\Scripts\activate
+python api.py
+
+STEP 2 — Start React Dashboard
+Open terminal 2:
+cd C:\Users\eshan\sentinel-dashboard
+npm start
+
+STEP 3 — Open browser
+Go to: http://localhost:3000
+
+DEMO SEQUENCE:
+1. Show live world map with threat scores
+2. Click Ukraine-Russia card — show signal breakdown
+3. Press PLAY REPLAY — watch score climb to 96
+4. Point out ALERT FIRED message
+5. Click GENERATE BRIEF — AI writes intelligence assessment
+6. Say: "This would have fired 72 hours before the invasion"
