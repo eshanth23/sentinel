@@ -234,14 +234,14 @@ Evidence: News mentions (28/30), ACLED events (18/20), Flight activity (11/20), 
 │   Scheduler     │  ← Runs every 30 min (or manual)
 │  (scheduler.py) │  ← Calls 5 APIs for 10 regions
 └────────┬────────┘  ← Saves to threat_cache.json
-│
-▼
+         │
+         ▼
 ┌─────────────────┐
 │  Backend API    │  ← Flask server (localhost:5000)
 │    (api.py)     │  ← Serves cached data + AI endpoints
 └────────┬────────┘
-│
-▼
+         │
+         ▼
 ┌─────────────────┐
 │ React Dashboard │  ← Frontend (localhost:3000)
 │    (App.js)     │  ← Map, charts, AI chat, verification
@@ -252,46 +252,6 @@ Evidence: News mentions (28/30), ACLED events (18/20), Flight activity (11/20), 
 - **Fast** — Zero latency for map interactions
 - **Scalable** — Scheduler can run on separate server, frontend deployed to CDN
 - **Cost-effective** — Minimizes API calls, stays within free tiers
-
----
-
-## 📈 Demo Flow (5 minutes)
-
-**Opening (15 sec)**
-> "Every wargame runs on fictional scenarios. SENTINEL runs on the real world — right now, live, in real time."
-
-**1. Live Map & Signals (30 sec)**
-- Show global threat map
-- Click Ukraine-Russia (72/100 HIGH)
-- Display signal breakdown: News 27/30, ACLED 18/20, Flights 11/20
-
-**2. Historical Replay (45 sec)**
-- Select Ukraine 2022 scenario
-- Press PLAY REPLAY
-- Pause when alert fires at 55+
-- **Key line:** *"That alert would have fired 72 hours before February 24, 2022. Nobody had this tool."*
-
-**3. AI Brief Generator (30 sec)**
-- Click GENERATE BRIEF
-- Show 5-second intelligence assessment
-- Highlight CIA-style formatting
-
-**4. Wargaming Scenarios (20 sec)**
-- Scroll to scenario cards
-- Point to probabilities: 68% escalation, 17% diplomacy, 15% standoff
-- Show recommended actions
-
-**5. AI Chatbot (25 sec)**
-- Type: "We have 72 hours — what do we do?"
-- Display strategic response with intervention protocol
-
-**6. Claim Verification (30 sec)**
-- Input: "Russian tanks at Ukraine border"
-- Show: LIKELY CREDIBLE 100/100
-- Display supporting signals from 4 sources
-
-**Closing (15 sec)**
-> "Built by one student. Runs for free. Built for everyone."
 
 ---
 
