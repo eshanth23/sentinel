@@ -230,22 +230,29 @@ Evidence: News mentions (28/30), ACLED events (18/20), Flight activity (11/20), 
 ---
 
 ## 🎯 System Architecture
-┌─────────────────┐
-│   Scheduler     │  ← Runs every 30 min (or manual)
-│  (scheduler.py) │  ← Calls 5 APIs for 10 regions
-└────────┬────────┘  ← Saves to threat_cache.json
-         │
-         ▼
-┌─────────────────┐
-│  Backend API    │  ← Flask server (localhost:5000)
-│    (api.py)     │  ← Serves cached data + AI endpoints
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ React Dashboard │  ← Frontend (localhost:3000)
-│    (App.js)     │  ← Map, charts, AI chat, verification
-└─────────────────┘
+
+**Three-Layer Design:**
+
+**Layer 1: Data Collection (Scheduler)**
+- Runs every 30 minutes or on-demand
+- Calls 5 APIs for 10 global regions
+- Calculates threat scores (0-100)
+- Saves to `threat_cache.json`
+
+**Layer 2: API Server (Backend)**
+- Flask server on `localhost:5000`
+- Serves cached data to frontend
+- Provides AI endpoints (brief, chat, verify)
+- Handles real-time queries
+
+**Layer 3: User Interface (Frontend)**
+- React dashboard on `localhost:3000`
+- Interactive map and visualizations
+- AI chat, claim verification
+- Reads from backend API
+
+**Data Flow:**
+Scheduler → threat_cache.json → Backend API → Frontend Dashboard
 
 **Why this design?**
 - **Resilient** — Dashboard reads from cache, not live APIs (no demo failures)
