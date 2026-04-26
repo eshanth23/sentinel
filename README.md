@@ -1,82 +1,302 @@
-# SENTINEL — AI-Powered Global Threat Intelligence System
+SENTINEL — AI-Powered Global Threat Intelligence System
+SCSP National Security Hackathon 2026
 
-**Built for SCSP National Security Hackathon 2026 (Wargaming Track)**
+👥 Team
+Eshanth Kumar Lal Das (Solo Entry)
+GitHub: @eshanth23
 
-SENTINEL is a real-time conflict prediction system that fuses 5 live signal sources to detect threats before they escalate — providing decision-makers with a 72-hour intervention window.
+🎯 Track
+Wargaming
 
-## 🎯 The Problem
+🚀 What We Built
+SENTINEL is a real-time conflict prediction system that detects threats before they escalate by fusing 5 live intelligence signals into a single threat score (0-100). It provides decision-makers with a 72-hour intervention window — the system would have detected the Ukraine invasion 72 hours before it happened.
+Core Features
+1. Live Threat Monitoring
 
-Every wargame runs on fictional scenarios. Intelligence analysts react to conflicts after they start. **SENTINEL runs on the real world — right now, live, in real time.**
+Tracks 10+ global hotspots with real-time threat scores
+Interactive world map with color-coded risk levels (NORMAL → ELEVATED → HIGH → CRITICAL)
+Automatic updates every 30 minutes via background scheduler
 
-## 🚀 What It Does
+2. Multi-Signal Intelligence Fusion
 
-- **Live Threat Scoring**: Monitors 10+ global hotspots with 0-100 threat scores updated every 30 minutes
-- **Multi-Signal Fusion**: Combines news (GDELT 65,000 sources), flight activity (OpenSky), seismic events (USGS), defense stocks (Yahoo Finance), and armed conflicts (ACLED)
-- **Historical Replay**: Simulates Ukraine 2022, Kargil 1999, Gulf War 1990, Israel-Iran 2024 — showing when SENTINEL alerts would have fired
-- **AI Conflict Briefs**: Generates intelligence assessments in <5 seconds using Groq + Llama 3
-- **Claim Verification**: Cross-references military claims against 5 signal sources with credibility scoring
-- **Wargaming Scenarios**: Three probabilistic paths (escalation/diplomacy/standoff) with recommended actions
-- **SENTINEL AI Advisor**: Chatbot with SIPRI arms data for strategic analysis
+News & Media (GDELT) — 65,000 sources in 100+ languages
+Aircraft Tracking (OpenSky Network) — Real-time military/civilian flight activity
+Seismic Monitoring (USGS) — Detects nuclear tests, artillery, underground activity
+Defense Stocks (Yahoo Finance) — Tracks insider trading patterns in weapons manufacturers
+Armed Conflicts (ACLED) — Ground truth of battles, explosions, and territorial control
 
-## 💰 Total Cost: $0.00
+3. Historical Validation
 
-Built entirely with free APIs and open-source tools. No cloud costs. Runs on a laptop.
+4 scenario replays: Ukraine 2022, Kargil 1999, Gulf War 1990, Israel-Iran 2024
+Shows when SENTINEL alerts would have fired before each conflict
+Proves 72-hour early warning capability
 
-## 🛠️ Tech Stack
+4. AI-Powered Analysis
 
-**Backend**: Python, Flask, Groq API (free tier)  
-**Frontend**: React, Leaflet maps, Recharts  
-**Data Sources**: GDELT, OpenSky Network, USGS, Yahoo Finance, ACLED (all free)
+Conflict Brief Generator — Produces CIA-style intelligence assessments in <5 seconds using Groq + Llama 3
+SENTINEL AI Advisor — Chatbot with access to live threat data and SIPRI arms databases
+Claim Verification Engine — Fact-checks military claims by cross-referencing 5 data sources, returns credibility score (0-100)
 
-## 📦 Installation
+5. Wargaming Scenarios
 
-### Backend
-```bash
-cd backend
+Three probabilistic future paths: Escalation / Diplomacy / Standoff
+Percentage likelihoods based on current threat patterns
+Recommended actions for each scenario
+
+6. Live Intelligence Feeds
+
+Airspace radar with aircraft positions and heading visualization
+News intelligence aggregator with source attribution
+Signal breakdown showing contribution of each data source
+
+Why It Matters
+
+Prevents Wars — Early detection enables diplomatic intervention before point of no return
+Democratizes Intelligence — Makes national-security-grade analysis accessible to journalists, NGOs, policymakers
+Costs Nothing — Entire system runs on free APIs and open-source tools
+Accessible — Built by one student with zero prior coding experience in 7 days
+
+
+📊 Datasets & APIs Used
+Primary Data Sources
+1. GDELT Project (News & Media Intelligence)
+
+API: https://api.gdeltproject.org/api/v2/doc/doc
+Coverage: 65,000 news sources in 100+ languages
+Usage: Tracks media mentions of conflicts, troop movements, diplomatic tensions
+Free tier: Unlimited
+
+2. OpenSky Network (Aircraft Tracking)
+
+API: https://opensky-network.org/api/states/all
+Coverage: Real-time ADS-B data from 4,000+ receivers worldwide
+Usage: Detects military flights, troop transports, unusual patterns in conflict zones
+Free tier: 400 requests/day (anonymous)
+
+3. USGS Earthquake Hazards Program (Seismic Monitoring)
+
+API: https://earthquake.usgs.gov/fdsnws/event/1/query
+Coverage: Global seismic sensors detecting magnitude 2.5+ events
+Usage: Identifies nuclear tests, artillery barrages, bunker construction
+Free tier: Unlimited
+
+4. Yahoo Finance (Defense Stock Prices)
+
+API: https://query1.finance.yahoo.com/v8/finance/chart/
+Coverage: Real-time stock data for Lockheed Martin, Raytheon, Northrop Grumman, General Dynamics, Boeing Defense
+Usage: Tracks insider trading and war profiteering patterns
+Free tier: Unlimited
+
+5. ACLED (Armed Conflict Location & Event Data)
+
+API: https://api.acleddata.com/acled/read
+Coverage: 200+ researchers tracking battles, explosions, protests, riots worldwide
+Usage: Ground truth verification of actual combat events
+Free tier: 15,000 requests/month
+
+AI/ML Services
+6. Groq (AI Inference)
+
+API: Groq Cloud API
+Model: Llama 3 (70B parameters)
+Usage: Generates conflict briefs, powers chatbot, analyzes strategic scenarios
+Free tier: 14,400 requests/day
+
+
+🛠️ Tech Stack
+Backend:
+
+Python 3.11
+Flask (API server)
+Requests (HTTP client)
+APScheduler (background tasks)
+
+Frontend:
+
+React 18
+Leaflet.js (interactive maps)
+Recharts (data visualization)
+Axios (API client)
+
+Data Storage:
+
+JSON cache (threat_cache.json) for offline resilience
+
+Development:
+
+Git/GitHub (version control)
+VS Code (IDE)
+Node.js 18+ (frontend tooling)
+
+
+⚙️ How to Run It
+Prerequisites
+
+Python 3.11+ — Download from python.org
+Node.js 18+ — Download from nodejs.org
+Git — Download from git-scm.com
+
+Installation
+1. Clone the repository
+bashgit clone https://github.com/eshanth23/sentinel.git
+cd sentinel
+2. Set up the backend
+bashcd backend
+python -m venv venv
+
+# On Windows:
+venv\Scripts\activate
+
+# On Mac/Linux:
+source venv/bin/activate
+
 pip install -r requirements.txt
-python api.py
-```
-
-### Frontend
-```bash
-cd frontend
+3. Set up the frontend
+bashcd ../frontend
 npm install
+Running the System
+Terminal 1 — Start the backend API server:
+bashcd backend
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Mac/Linux
+python api.py
+Backend runs on http://localhost:5000
+Terminal 2 — Start the frontend dashboard:
+bashcd frontend
 npm start
-```
+Frontend opens automatically at http://localhost:3000
+Optional — Run the scheduler to pull fresh data:
+bashcd backend
+venv\Scripts\activate
+python scheduler.py
+This updates threat_cache.json with live data from all 5 APIs (takes 2-3 minutes). The scheduler can also run as a background cron job for automatic 30-minute updates.
+First-Time Setup
+On first run, the scheduler needs to populate the cache:
+bashcd backend
+python scheduler.py
+Wait for completion, then start both servers as described above.
 
-Access at `http://localhost:3000`
+📱 Usage
+Live Monitoring
 
-## 🎮 Live Demo Features
+Open http://localhost:3000 in your browser
+View the global threat map — regions are color-coded by risk level
+Click any region card to see detailed signal breakdown
+Watch scores update every 30 minutes (if scheduler is running)
 
-1. **Global Threat Map** — Interactive world map with live threat zones
-2. **Signal Breakdown** — Real-time scores from 5 data sources
-3. **Airspace Radar** — Live aircraft tracking via OpenSky Network
-4. **News Intelligence** — 65,000 sources aggregated via GDELT
-5. **Historical Scenarios** — Watch past conflicts replay with signal patterns
-6. **AI Brief Generator** — Classified-style intelligence reports
-7. **Claim Verifier** — Fact-check military claims in real-time
+Historical Replay
 
-## 🏆 Why SENTINEL Wins
+Select a scenario: Ukraine 2022, Kargil 1999, Gulf War 1990, or Israel-Iran 2024
+Click "PLAY REPLAY" to watch threat score climb over time
+Observe when the alert would have fired (55+ threshold)
+Validates early warning capability with real historical data
 
-- **Built by one student in 7 days** — from zero coding experience
-- **100% free to run** — no API costs, no cloud infrastructure
-- **Real data, real time** — not simulated, not fictional
-- **72-hour intervention window** — detected Ukraine invasion before it happened
-- **Built for everyone** — open source, accessible, scalable
+AI Features
 
-## 📊 Current Threat Levels (Live)
+Generate Brief — Click button to produce intelligence assessment (5 seconds)
+Ask Chatbot — Type questions about current threats, strategy, weapons data
+Verify Claims — Paste military claims to get credibility scores and evidence
 
-- 🔴 Israel-Gaza-Iran: 80/100 CRITICAL
-- 🔴 Myanmar Conflict: 75/100 CRITICAL  
-- 🟠 Ukraine-Russia: 72/100 HIGH
-- 🟠 Taiwan-China: 68/100 HIGH
+Claim Verification Example
+Input: "Russian tanks are massing at the Ukrainian border"
+Output: LIKELY CREDIBLE — 100/100
+Evidence: News mentions (28/30), ACLED events (18/20), Flight activity (11/20), Defense stocks (+15%)
 
-## 🧠 Author
+🎯 System Architecture
+┌─────────────────┐
+│   Scheduler     │  ← Runs every 30 min (or manual)
+│  (scheduler.py) │  ← Calls 5 APIs for 10 regions
+└────────┬────────┘  ← Saves to threat_cache.json
+         │
+         ▼
+┌─────────────────┐
+│  Backend API    │  ← Flask server (localhost:5000)
+│    (api.py)     │  ← Serves cached data + AI endpoints
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ React Dashboard │  ← Frontend (localhost:3000)
+│    (App.js)     │  ← Map, charts, AI chat, verification
+└─────────────────┘
+Why this design?
 
-**Eshanth Kumar Lal Das**  
-Solo developer | SCSP Hackathon 2026  
-GitHub: [@eshanth23](https://github.com/eshanth23)
+Resilient — Dashboard reads from cache, not live APIs (no demo failures)
+Fast — Zero latency for map interactions
+Scalable — Scheduler can run on separate server, frontend deployed to CDN
+Cost-effective — Minimizes API calls, stays within free tiers
 
----
 
-*"Every wargame runs on fictional scenarios. SENTINEL runs on the real world."*
+📈 Demo Flow (5 minutes)
+Opening (15 sec)
+
+"Every wargame runs on fictional scenarios. SENTINEL runs on the real world — right now, live, in real time."
+
+1. Live Map & Signals (30 sec)
+
+Show global threat map
+Click Ukraine-Russia (72/100 HIGH)
+Display signal breakdown: News 27/30, ACLED 18/20, Flights 11/20
+
+2. Historical Replay (45 sec)
+
+Select Ukraine 2022 scenario
+Press PLAY REPLAY
+Pause when alert fires at 55+
+Key line: "That alert would have fired 72 hours before February 24, 2022. Nobody had this tool."
+
+3. AI Brief Generator (30 sec)
+
+Click GENERATE BRIEF
+Show 5-second intelligence assessment
+Highlight CIA-style formatting
+
+4. Wargaming Scenarios (20 sec)
+
+Scroll to scenario cards
+Point to probabilities: 68% escalation, 17% diplomacy, 15% standoff
+Show recommended actions
+
+5. AI Chatbot (25 sec)
+
+Type: "We have 72 hours — what do we do?"
+Display strategic response with intervention protocol
+
+6. Claim Verification (30 sec)
+
+Input: "Russian tanks at Ukraine border"
+Show: LIKELY CREDIBLE 100/100
+Display supporting signals from 4 sources
+
+Closing (15 sec)
+
+"Built by one student. Runs for free. Built for everyone."
+
+
+💰 Total Cost
+$0.00
+All APIs are free tier:
+
+GDELT: Free
+OpenSky: Free (anonymous access)
+USGS: Free
+Yahoo Finance: Free
+ACLED: Free (15K requests/month)
+Groq: Free (14.4K requests/day)
+
+No cloud hosting, no database subscriptions, no compute credits.
+
+🏆 Key Achievements
+✅ Multi-signal fusion — First system to combine news + flights + seismic + stocks + conflicts
+✅ 72-hour early warning — Validated against Ukraine 2022 invasion
+✅ Zero cost — Runs entirely on free APIs
+✅ Non-technical builder — Proves accessibility (7 days, zero prior coding)
+✅ Production-ready — Fully functional, professional UI, real-time data
+✅ Open source — Available for anyone to use, modify, deploy
+
+📧 Contact
+Eshanth Kumar Lal Das
+GitHub: @eshanth23
+Repository: github.com/eshanth23/sentinel
+
+"Built for everyone. Built to prevent the next war."
