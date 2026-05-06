@@ -281,8 +281,6 @@ Open an issue or PR to get started.
 
 ## 📜 **License**
 
-MIT License - see [LICENSE](LICENSE) for details.
-
 Free to use, modify, and deploy for any purpose.
 
 ---
