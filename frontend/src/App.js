@@ -425,6 +425,9 @@ function App() {
             {/* LIVE NEWS FEED */}
       <NewsFeed region={selected} />
 
+
+      <SatelliteImagery region={selected} />
+
       {/* BOTTOM GRID */}
       <div className="bottom-grid">
 
@@ -948,6 +951,176 @@ const fetchNews = async () => {
     </div>
   );
 }
+
+function SatelliteImagery({ region }) {
+  const [imageData, setImageData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!region) return;
+    fetchSatelliteImage();
+  }, [region?.country]);
+
+  const fetchSatelliteImage = async () => {
+    if (!region) return;
+    
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const regionParam = region.country.replace(/ /g, '_').replace(/-/g, '_');
+      const res = await axios.get(`${API}/satellite/${regionParam}`, {
+        timeout: 30000  // 30 seconds
+      });
+      setImageData(res.data);
+    } catch (e) {
+      console.error('Satellite image error:', e);
+      setError('Satellite imagery unavailable for this region');
+    }
+    
+    setLoading(false);
+  };
+
+  if (!region) return null;
+
+  return (
+    <div style={{
+      background: '#0d1321',
+      border: '1px solid #1e3a5f',
+      borderRadius: '8px',
+      padding: '16px',
+      marginBottom: '20px'
+    }}>
+      {/* Header */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '12px'
+      }}>
+        <div style={{
+          fontSize: '11px',
+          color: '#4a6fa5',
+          letterSpacing: '2px'
+        }}>
+          SATELLITE IMAGERY — {region.country.toUpperCase()}
+        </div>
+        <button
+          onClick={fetchSatelliteImage}
+          disabled={loading}
+          style={{
+            background: loading ? '#1e3a5f' : 'transparent',
+            border: '1px solid #00d4ff',
+            color: loading ? '#4a6fa5' : '#00d4ff',
+            padding: '4px 12px',
+            borderRadius: '4px',
+            fontSize: '11px',
+            fontFamily: 'Courier New',
+            cursor: loading ? 'not-allowed' : 'pointer'
+          }}
+        >
+          {loading ? 'FETCHING...' : 'REFRESH IMAGE'}
+        </button>
+      </div>
+
+      {/* Image display */}
+      {loading ? (
+        <div style={{
+          height: '400px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#0a0e1a',
+          borderRadius: '6px',
+          color: '#00d4ff',
+          fontSize: '14px',
+          fontFamily: 'Courier New'
+        }}>
+          <div style={{ marginBottom: '10px' }}>Requesting latest satellite pass...</div>
+          <div style={{ fontSize: '12px', color: '#4a6fa5' }}>
+            Copernicus Sentinel-2 • 10m resolution
+          </div>
+        </div>
+      ) : error ? (
+        <div style={{
+          height: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#0a0e1a',
+          borderRadius: '6px',
+          color: '#ff8800',
+          fontSize: '13px',
+          fontFamily: 'Courier New'
+        }}>
+          {error}
+        </div>
+      ) : imageData ? (
+        <>
+          <div style={{ position: 'relative' }}>
+            <img 
+              src={imageData.image} 
+              alt={`Satellite view of ${imageData.location}`}
+              style={{
+                width: '100%',
+                height: '400px',
+                objectFit: 'cover',
+                borderRadius: '6px',
+                border: '1px solid #1e3a5f'
+              }}
+            />
+            {/* Overlay label */}
+            <div style={{
+              position: 'absolute',
+              top: '10px',
+              left: '10px',
+              background: 'rgba(10, 14, 26, 0.9)',
+              border: '1px solid #00d4ff',
+              borderRadius: '4px',
+              padding: '6px 12px',
+              fontSize: '12px',
+              color: '#00d4ff',
+              fontFamily: 'Courier New'
+            }}>
+              {imageData.location}
+            </div>
+          </div>
+
+          {/* Metadata */}
+          <div style={{
+            marginTop: '10px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            fontSize: '11px',
+            color: '#4a6fa5',
+            fontFamily: 'Courier New'
+          }}>
+            <span>Last clear image: {imageData.date}</span>
+            <span>Resolution: {imageData.resolution}</span>
+            <span>Source: {imageData.source}</span>
+          </div>
+        </>
+      ) : (
+        <div style={{
+          height: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#0a0e1a',
+          borderRadius: '6px',
+          color: '#4a6fa5',
+          fontSize: '13px',
+          fontFamily: 'Courier New'
+        }}>
+          Select a region to view satellite imagery
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 
 function getFallbackArticles(country) {
