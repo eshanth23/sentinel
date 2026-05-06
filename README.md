@@ -171,32 +171,45 @@ python scheduler.py
 ---
 
 ## 🎯 **System Architecture**
-┌─────────────────────┐
-│   SCHEDULER         │  Runs every 30 min
-│  (scheduler.py)     │  Calls 5 APIs
-│                     │  Saves to cache
-└──────────┬──────────┘
-│
-▼
-┌─────────────────────┐
-│   BACKEND API       │  Flask (localhost:5000)
-│    (api.py)         │  Serves cached data
-│                     │  AI endpoints
-└──────────┬──────────┘
-│
-▼
-┌─────────────────────┐
-│  REACT DASHBOARD    │  (localhost:3000)
-│    (App.js)         │  Interactive UI
-│                     │  Maps, charts, AI
-└─────────────────────┘
 
-**Why this design?**
-- ✅ Resilient (cache prevents API failures during demos)
-- ✅ Fast (zero latency for UI interactions)
-- ✅ Cost-effective (minimizes API calls, stays in free tiers)
-- ✅ Scalable (can deploy scheduler/backend/frontend separately)
+SENTINEL uses a three-layer architecture optimized for reliability and cost:
 
+### **Layer 1: Data Collection**
+| Component | Function |
+|-----------|----------|
+| **scheduler.py** | Runs every 30 minutes (or on-demand) |
+| **Actions** | Calls 5 APIs for 10 regions → Calculates scores → Saves to cache |
+| **Output** | threat_cache.json |
+
+⬇️
+
+### **Layer 2: API Server**
+| Component | Function |
+|-----------|----------|
+| **api.py** | Flask server on localhost:5000 |
+| **Actions** | Loads cache → Serves data to frontend → Provides AI endpoints |
+| **Endpoints** | /api/threats, /api/brief, /api/chat, /api/verify |
+
+⬇️
+
+### **Layer 3: User Interface**
+| Component | Function |
+|-----------|----------|
+| **App.js** | React dashboard on localhost:3000 |
+| **Features** | Interactive map, AI tools, historical replay, wargaming |
+| **Data Source** | Backend API (reads from cache) |
+
+---
+
+**Data Flow:**
+External APIs → Scheduler → Cache → Backend → Frontend
+
+**Why This Design?**
+
+✅ **Resilient** — Cache prevents API failures during demos  
+✅ **Fast** — Zero latency for UI interactions  
+✅ **Cost-effective** — Minimizes API calls, stays in free tiers  
+✅ **Scalable** — Each layer can be deployed independently
 ---
 
 ## 📊 **Data Sources**
