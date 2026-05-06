@@ -306,6 +306,9 @@ Free to use, modify, and deploy for any purpose.
 **Built by one student. Runs for free. Built for everyone.**
 
 ---
+<img width="1895" height="911" alt="Screenshot (301)" src="https://github.com/user-attachments/assets/8e248078-31ea-4e48-970c-5be07bf4b131" />
+
+---
 
 <div align="center">
 
@@ -317,5 +320,5 @@ Free to use, modify, and deploy for any purpose.
 
 </div>
 
-<img width="1895" height="911" alt="Screenshot (301)" src="https://github.com/user-attachments/assets/af62ea3d-60c9-4bea-9e7d-ae7d063b99eb" />
+
 
