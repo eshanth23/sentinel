@@ -306,7 +306,8 @@ Free to use, modify, and deploy for any purpose.
 **Built by one student. Runs for free. Built for everyone.**
 
 ---
-<img width="1895" height="911" alt="Screenshot (301)" src="https://github.com/user-attachments/assets/8e248078-31ea-4e48-970c-5be07bf4b131" />
+<img width="1889" height="917" alt="Screenshot (294)" src="https://github.com/user-attachments/assets/a98cbc41-41cb-40a7-82a0-b9f8f6ac06a4" />
+
 
 ---
 
