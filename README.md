@@ -316,3 +316,6 @@ Free to use, modify, and deploy for any purpose.
 [![Star History](https://img.shields.io/github/stars/eshanth23/sentinel?style=social)](https://github.com/eshanth23/sentinel/stargazers)
 
 </div>
+
+<img width="1895" height="911" alt="Screenshot (301)" src="https://github.com/user-attachments/assets/af62ea3d-60c9-4bea-9e7d-ae7d063b99eb" />
+
