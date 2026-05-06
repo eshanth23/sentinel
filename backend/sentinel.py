@@ -58,11 +58,11 @@ def run_sentinel():
         print()
         print("Generating AI brief for this historical moment...")
         time.sleep(2)
-        from brief import generate_ukraine_2022_brief
+        from backend.brief import generate_ukraine_2022_brief
         generate_ukraine_2022_brief()
         
     elif choice == "3":
-        from brief import generate_ukraine_2022_brief
+        from backend.brief import generate_ukraine_2022_brief
         generate_ukraine_2022_brief()
     
     else:

@@ -6,6 +6,10 @@ from datetime import datetime, timezone
 from signals import calculate_threat_score
 import threading
 import json
+import requests
+from datetime import datetime, timedelta
+import base64
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app, origins=[
@@ -412,8 +416,9 @@ WHAT SENTINEL CANNOT DO:
 - Access military databases
 
 Keep responses complete, under 400 words, professional."""
-
-        client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+        
+        
+        client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
         messages = [{"role": "system", "content": system_prompt}]
         for msg in history[-6:]:
@@ -605,6 +610,120 @@ def get_news(region):
         "articles": articles,
         "count": len(articles)
     })
+@app.route('/api/satellite/<region>', methods=['GET'])
+def get_satellite_image(region):
+    """
+    Fetch recent satellite imagery for border regions
+    """
+    # Border coordinates for each region
+    BORDER_COORDS = {
+        'Ukraine_Russia': {'lat': 50.5, 'lon': 36.0, 'name': 'Kharkiv Border Region'},
+        'Taiwan_China': {'lat': 24.0, 'lon': 118.3, 'name': 'Taiwan Strait'},
+        'India_Pakistan': {'lat': 32.5, 'lon': 74.5, 'name': 'Kashmir LOC'},
+        'Israel_Gaza_Iran': {'lat': 31.5, 'lon': 34.5, 'name': 'Gaza Border'},
+        'Korean_Peninsula': {'lat': 38.0, 'lon': 127.5, 'name': 'DMZ'},
+    }
+    
+    region_key = region.replace('-', '_').replace(' ', '_')
+    
+    if region_key not in BORDER_COORDS:
+        return jsonify({'error': 'No satellite data for this region'}), 404
+    
+    coords = BORDER_COORDS[region_key]
+    
+    # Sentinel Hub configuration
+    INSTANCE_ID = ''  # Replace with your ID
+    CLIENT_ID = ''      # Replace with your ID
+    CLIENT_SECRET = ''      # Replace with your secret
+    
+    try:
+        # Get OAuth token
+        token_url = 'https://services.sentinel-hub.com/oauth/token'
+        token_data = {
+            'grant_type': 'client_credentials',
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET
+        }
+        token_response = requests.post(token_url, data=token_data, timeout=10)
+        access_token = token_response.json()['access_token']
+        
+        # Calculate bounding box (0.1 degree ~ 11km)
+        bbox = [
+            coords['lon'] - 0.1,  # west
+            coords['lat'] - 0.1,  # south
+            coords['lon'] + 0.1,  # east
+            coords['lat'] + 0.1   # north
+        ]
+        
+        # Request image from last 30 days
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=30)
+        
+        # Sentinel Hub Process API request
+        api_url = f'https://services.sentinel-hub.com/api/v1/process'
+        
+        payload = {
+            "input": {
+                "bounds": {
+                    "bbox": bbox
+                },
+                "data": [{
+                    "type": "S2L2A",  # Sentinel-2 Level 2A
+                    "dataFilter": {
+                        "timeRange": {
+                            "from": start_date.strftime('%Y-%m-%dT00:00:00Z'),
+                            "to": end_date.strftime('%Y-%m-%dT23:59:59Z')
+                        },
+                        "maxCloudCoverage": 30
+                    }
+                }]
+            },
+            "output": {
+                "width": 800,
+                "height": 600,
+                "responses": [{
+                    "identifier": "default",
+                    "format": {"type": "image/jpeg"}
+                }]
+            },
+            "evalscript": """
+                //VERSION=3
+                function setup() {
+                    return {
+                        input: ["B04", "B03", "B02"],
+                        output: { bands: 3 }
+                    };
+                }
+                function evaluatePixel(sample) {
+                    return [2.5 * sample.B04, 2.5 * sample.B03, 2.5 * sample.B02];
+                }
+            """
+        }
+        
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
+        
+        image_response = requests.post(api_url, json=payload, headers=headers, timeout=30)
+        
+        if image_response.status_code == 200:
+            # Convert image to base64
+            image_b64 = base64.b64encode(image_response.content).decode('utf-8')
+            
+            return jsonify({
+                'image': f'data:image/jpeg;base64,{image_b64}',
+                'location': coords['name'],
+                'date': end_date.strftime('%Y-%m-%d'),
+                'source': 'Copernicus Sentinel-2',
+                'resolution': '10m per pixel'
+            })
+        else:
+            return jsonify({'error': 'Satellite image unavailable'}), 404
+            
+    except Exception as e:
+        print(f"Satellite fetch error: {e}")
+        return jsonify({'error': 'Failed to fetch satellite imagery'}), 500
 if __name__ == '__main__':
     print("=" * 50)
     print("SENTINEL API SERVER")
