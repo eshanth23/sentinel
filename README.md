@@ -172,33 +172,41 @@ python scheduler.py
 
 ## 🎯 **System Architecture**
 
-SENTINEL uses a three-layer architecture optimized for reliability and cost:
+SENTINEL follows a three-layer design:
 
-### **Layer 1: Data Collection**
-| Component | Function |
-|-----------|----------|
-| **scheduler.py** | Runs every 30 minutes (or on-demand) |
-| **Actions** | Calls 5 APIs for 10 regions → Calculates scores → Saves to cache |
-| **Output** | threat_cache.json |
+---
 
-⬇️
+### 📊 **Layer 1: Data Collection (scheduler.py)**
 
-### **Layer 2: API Server**
-| Component | Function |
-|-----------|----------|
-| **api.py** | Flask server on localhost:5000 |
-| **Actions** | Loads cache → Serves data to frontend → Provides AI endpoints |
-| **Endpoints** | /api/threats, /api/brief, /api/chat, /api/verify |
+Runs every 30 minutes or on-demand. Calls 5 APIs for 10 global regions, calculates threat scores (0-100), and saves results to `threat_cache.json`.
 
-⬇️
+**Purpose:** Collect and process raw intelligence signals
 
-### **Layer 3: User Interface**
-| Component | Function |
-|-----------|----------|
-| **App.js** | React dashboard on localhost:3000 |
-| **Features** | Interactive map, AI tools, historical replay, wargaming |
-| **Data Source** | Backend API (reads from cache) |
+---
 
+### 🔌 **Layer 2: API Server (api.py)**
+
+Flask server on `localhost:5000`. Loads cached data and serves it to the frontend. Provides AI endpoints for conflict briefs, chatbot, and claim verification.
+
+**Purpose:** Expose data and AI features via REST API
+
+---
+
+### 🖥️ **Layer 3: Dashboard (App.js)**
+
+React application on `localhost:3000`. Displays interactive map, visualizations, AI tools, and historical replays. Reads all data from the backend API.
+
+**Purpose:** User interface for threat monitoring and analysis
+
+---
+
+**Data Flow:** External APIs → Scheduler → Cache → Backend → Frontend
+
+**Design Benefits:**
+- ✅ Resilient (cache prevents demo failures)
+- ✅ Fast (no live API delays)
+- ✅ Cost-effective (stays in free tiers)
+- ✅ Scalable (deploy layers separately)
 ---
 
 **Data Flow:**
