@@ -9,8 +9,6 @@
 
 **Real-time conflict prediction system that would have detected the Ukraine invasion 72 hours before it happened.**
 
-[Live Demo](#-usage) • [Installation](#️-how-to-run-it) • [Documentation](#-datasets--apis-used) • [Contact](#-contact)
-
 Built for **SCSP National Security Hackathon 2026** (Wargaming Track)
 
 </div>
