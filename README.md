@@ -1,5 +1,7 @@
 # SENTINEL — AI-Powered Global Threat Intelligence System
 
+
+
 <div align="center">
 
 ![SENTINEL Logo](https://img.shields.io/badge/SENTINEL-Conflict%20Prediction-00d4ff?style=for-the-badge)
